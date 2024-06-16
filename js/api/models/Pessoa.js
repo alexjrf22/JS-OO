@@ -6,6 +6,7 @@ export class Pessoa
     _peso
     _altura
     _imc
+    _classificacao
     static totalPessoas = 0
 
     constructor (nome, idade, peso, altura)
@@ -14,19 +15,15 @@ export class Pessoa
         this._idade = idade
         this._peso = peso
         this._altura = altura
-        this._imc = this._peso / (this._altura * this._altura)
+        this._imc = this._peso / (this._altura * this._altura).toFixed(2)
         Pessoa.totalPessoas += 1
+        this._classificacao = this.classificaImc()
         
-    }
-
-    calcularImc()
-    {
-        return (this._peso / (this._altura * this._altura)).toFixed(2)
     }
 
     classificaImc()
     {
-        let imc = (this._imc).toFixed(2)
+        let imc = this.imc
         let classificacao = ''
 
         if(imc < 18.5){
@@ -47,6 +44,11 @@ export class Pessoa
 
         return classificacao
 
+    }
+
+    calculaImc()
+    {
+        return this.imc
     }
 
     set nome(nome)
